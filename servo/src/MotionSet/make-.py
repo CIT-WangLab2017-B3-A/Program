@@ -24,7 +24,7 @@ class parameter:
         __y = __Posmat[:,1]
         __z = __Posmat[:,2]
         __fp = open(self.__FILENAME,'w')
-        __csvWrite = csv.writer(__fp)
+        __csvWrite = csv.writer(__fp, lineterminator='\n')
         for j in xrange(lenSpeed):
             for i in xrange(__LegPerSpeed):
                 __Yop = 1 if self.__LegNumber[i]%2 else -1 # [1 or -1]

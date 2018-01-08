@@ -12,21 +12,24 @@ import time
 def main():
     servo = move()
     servo.Stand('parameter/StandAll.csv')
-    time.sleep(1.0)
+    time.sleep(2.0)
     
-    for i in xrange(12):
-        print "###"
+    for i in xrange(6):
         servo.Action('test/test1.csv', 0.01)
         servo.Action('test/test2.csv', 0.01)
         servo.Action('test/test3.csv', 0.01)
         servo.Action('test/test4.csv', 0.01)
         servo.Action('test/test5.csv', 0.01)
         servo.Action('test/test6.csv', 0.01)
-        #servo.Action('test/test7.csv', 0.01)
-        #servo.Action('test/test8.csv', 0.01)
-        #servo.Action('test/test9.csv', 0.01)
-        #servo.Action('test/test10.csv', 0.01)
-        #servo.Action('test/test11.csv', 0.01)
+        servo.Action('test/test7.csv', 0.01)
+        servo.Action('test/test8.csv', 0.01)
+        servo.Action('test/test9.csv', 0.01)
+        servo.Action('test/test10.csv', 0.01)
+        servo.Action('test/test11.csv', 0.01)
+        servo.Action('test/test12.csv', 0.01)
+        servo.Action('test/test13.csv', 0.01)
+        servo.Action('test/test14.csv', 0.01)
+        servo.Action('test/test15.csv', 0.01)
     servo.Stand('parameter/StandAll.csv')
     servo.ahead('Ahead0.csv',0.01)
 

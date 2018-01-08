@@ -25,7 +25,7 @@ class parameter:
         __y = __Posmat[:,1]
         __z = __Posmat[:,2]
         __fp = open(self.__FILENAME,'w')
-        __csvWrite = csv.writer(__fp)
+        __csvWrite = csv.writer(__fp, lineterminator='\n')
 
         for j in xrange(lenSpeed):
             for i in xrange(__LegPerSpeed):
@@ -56,7 +56,7 @@ if __name__ == "__main__":
     DownRight = parameter([0,3,4], PATH+'Ahead/DownRight.csv')
     PullRight = parameter([0,3,4,1,2,5], PATH+'Ahead/PullRight.csv')
     DownLeft = parameter([1,2,5], PATH+'Ahead/DownLeft.csv')
-    PullLeft = parameter([1,2,5,0,3,4], PATH+'Ahead/PullLeft.csv'))
+    PullLeft = parameter([1,2,5,0,3,4], PATH+'Ahead/PullLeft.csv')
 
 #   <   >.make(Speed array, Position Matrix(x,y,z))
     Position = [

@@ -3,6 +3,7 @@
 
 # VL53L0X -ToF sensor
 
+import wiringpi as w
 from sensor import sensor
 import time
 ToF = sensor()
