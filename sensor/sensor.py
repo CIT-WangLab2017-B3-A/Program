@@ -2,9 +2,7 @@
 # coding: utf-8
 
 from i2c import i2c
-import Address
 import time
-import numpy as np
 def d16(value):
     return -(value & 0x8000) | (value & 0x7FFF)
 
