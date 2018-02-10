@@ -10,7 +10,6 @@ from uart import uart
 def main():    
     # torque ON
     servo = uart()
-    servo.Stop()
     servo.Close()
 
 

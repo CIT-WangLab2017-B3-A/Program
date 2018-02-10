@@ -5,9 +5,10 @@ import time
 import socket
 import sys
 from move import move
+from ToF import *
 
 STEP_LENGTH = 204
-STEP_ANGLE = 15 
+STEP_ANGLE = 20 
 
 class Soc_server:
 	def __init__(self,address,port_number):
@@ -32,15 +33,29 @@ class Soc_server:
 					break
 				temp_data = rcvmsg.split(',')
 				self.control.main((temp_data[0],float(temp_data[1])))
-				self.mode = 1	
+				if temp_data[0] == 'b':
+					self.mode = 2
+				else:
+					self.mode = 1
+
 			if self.mode == 1:
 				print "send result"
 				self.clientsock.sendall("0")
 				self.mode = 0
+			
+			if self.mode == 2:
+				fg = self.control.ball_check_fg
+				print "send ball result",fg
+				if fg == 1:
+					self.clientsock.sendall("1")
+				else:
+					self.clientsock.sendall("0")
+				self.mode = 0
 
 class Control:
 	def __init__(self):
-		pass
+		self.ball_check_fg = 0
+		self.tof = ToF()
 
 	def stand_up_before_walk(self):
 		servo = move()
@@ -48,10 +63,13 @@ class Control:
 			temp_str = 'stand_before_walk/test' + str(i) + '.csv'
 			servo.Action(temp_str,0.01)
 	
-	def stand_up_before_turn(self):
+	def stand_up_before_turn(self,direction):
 		servo = move()
 		for i in xrange(16):
-			temp_str = 'stand_before_turn/test' + str(i) + '.csv'
+			if direction == 'r':
+				temp_str = 'stand_before_turn_right/test' + str(i) + '.csv'
+			if direction == 'l':
+				temp_str = 'stand_before_turn_left/test' + str(i) + '.csv'
 			servo.Action(temp_str,0.01)
 	
 	def ahead(self,value):
@@ -67,15 +85,28 @@ class Control:
 				servo.Action(temp_str,0.01)
 		servo.Close()
 	
-	def dash(self,value):
+	def back(self,value):
 		n = int(value // STEP_LENGTH) + 1
 		servo = move()
-		print "dash :",value
+		print "back :",value
 		for i in xrange(n):
-			for j in xrange(8):
-				temp_str = 'walk08/test' + str(j) + '.csv'
+			for j in xrange(24):
+				temp_str = 'back24/test' + str(j) + '.csv'
 				if i == (n - 1):
-					if (value - ((n-1) * STEP_LENGTH)) < (STEP_LENGTH*j/8):
+					if (value - ((n-1) * STEP_LENGTH)) < (STEP_LENGTH*j/24):
+						break
+				servo.Action(temp_str,0.01)
+		servo.Close()
+	
+	def high(self,value):
+		n = int(value // STEP_LENGTH) + 1
+		servo = move()
+		print "high :",value
+		for i in xrange(n):
+			for j in xrange(24):
+				temp_str = 'walk24high/test' + str(j) + '.csv'
+				if i == (n - 1):
+					if (value - ((n-1) * STEP_LENGTH)) < (STEP_LENGTH*j/24):
 						break
 				servo.Action(temp_str,0.01)
 		servo.Close()
@@ -107,25 +138,40 @@ class Control:
 		servo.Close()
 
 	def ball_catch(self):
+		self.ball_check_fg = 0
 		servo = move()
 		servo.Action('Ball/BallCatch.csv',1.0)
 		servo.Close()
-
+		if self.tof.ReadDistance() == 2:
+			self.ball_check_fg = 1
+	
+	def ball_dust(self):
+		self.ball_check_fg = 0
+		servo = move()
+		servo.Action('Ball/BallDust.csv',1.0)
+		servo.Close()
+	
 	def main(self,action_data):
 		print action_data
 		if action_data[0] == 'b':
 			self.ball_catch()
+		if action_data[0] == 'd':
+			self.ball_dust()
 		if action_data[0] == 'x':
 			self.stand_up_before_walk()
-			self.ahead(1000 * action_data[1])
-		if action_data[0] == 'd':
-			self.stand_up_before_walk()
-			self.dash(1000 * action_data[1])
-		if action_data[0] == 'r':
-			self.stand_up_before_turn()
 			if action_data[1] > 0:
+				self.ahead(1000 * action_data[1])
+			else:
+				self.back(1000 * -action_data[1])
+		if action_data[0] == 'h':
+			self.stand_up_before_walk()
+			self.high(1000 * action_data[1])
+		if action_data[0] == 'r':
+			if action_data[1] > 0:
+				self.stand_up_before_turn('l')
 				self.turn_left(action_data[1])
 			else:
+				self.stand_up_before_turn('r')
 				self.turn_right(-action_data[1])
 		time.sleep(2)
 		print "Move complete"

@@ -4,19 +4,33 @@
 # VL53L0X -ToF sensor
 from sensor import sensor
 import time
-ToF = sensor()
 
-calib_x = [-18, -18, -19, -20, -33, -41, -29, -29, -28, -28]
-LOOP = 10
+class ToF:
+    def __init__(self):
+        self.ToF = sensor()
+    def ReadDistance(self):
+        
+        #calib_x = [-18, -18, -19, -20, -33, -41, -29, -29, -28, -28]
+        LOOP = 10
+        flag = 0
+        tmp = 0.0
+        for i in xrange(LOOP):
+            tmp += float(self.ToF.ReadDistance())
+        Distance =  tmp / float(LOOP)
+        Distance = min(Distance, 499.0)
+        #Distance += float(calib_x[int(Distance)/50])
+        print Distance,
+	if (Distance < 100):
+	    flag = 2
+	    print "ゲット"
+        elif (Distance < 200):
+            flag = 1
+            print "Ballかも"
+        else:
+            flag = 0
+            print "Ballない"
+        time.sleep(0.001)
 
-Distance     = float(ToF.ReadDistance()) / float(LOOP)
-Old_Distance = float(calib_x[int(Distance)/50])
-while True:
-    tmp = 0.0
-    for i in xrange(LOOP):
-        tmp += float(ToF.ReadDistance())
-    Distance =  tmp / float(LOOP)
-    Distance += float(calib_x[int(Distance)/50])
-    print Distance
-    Old_Distance = Distance
-    time.sleep(0.001)
+TOF = ToF()
+
+TOF.ReadDistance()

@@ -9,6 +9,7 @@ class uart:
     def __init__(self, port='/dev/ttyS0', rate=115200):
         self.OFF=0x00
         self.ON=0x01
+        self.PANTCH=0x02
         self.uart=serial.Serial(port, rate)
     def Write(self, TxData):
         self.uart.write(TxData)
@@ -68,7 +69,7 @@ class uart:
         self.TxData = self.ShortPacket(ID, 0x00, 0x24, 0x01, SW)
         self.Write(self.TxData)
     def Stop(self):
-        self.Torque(0xFF, self.OFF)
+        self.Torque(0xFF, self.PANTCH)
     def ZeroAll(self):
         self.Data = self.Angle_Speed(0, 0.01)
         self.Torque(0xFF, self.ON)
@@ -89,4 +90,5 @@ class uart:
             time.sleep(1.0)
         self.Torque(ID, self.OFF)
     def Close(self):
+        self.Torque(0xFF,self.OFF)
         self.uart.close()

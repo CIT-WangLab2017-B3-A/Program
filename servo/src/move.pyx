@@ -72,8 +72,8 @@ class move:
             time.sleep(sleep)
             self.Data = self.DataImport()
         self.FileClose()
-        
+    def Stop(self):
+        self.servo.Stop()
     def Close(self):
-        self.servo.Torque(0xFF, self.servo.OFF)
         self.servo.Close()
         

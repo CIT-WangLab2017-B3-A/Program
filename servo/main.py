@@ -12,49 +12,50 @@ import time
 def main():
     servo = move()
     servo.Stand('parameter/StandAll.csv')
-    time.sleep(2.0)
     
-    for i in xrange(6):
-        servo.Action('test/test1.csv', 0.01)
-        servo.Action('test/test2.csv', 0.01)
-        servo.Action('test/test3.csv', 0.01)
-        servo.Action('test/test4.csv', 0.01)
-        servo.Action('test/test5.csv', 0.01)
-        servo.Action('test/test6.csv', 0.01)
-        servo.Action('test/test7.csv', 0.01)
-        servo.Action('test/test8.csv', 0.01)
-        servo.Action('test/test9.csv', 0.01)
-        servo.Action('test/test10.csv', 0.01)
-        servo.Action('test/test11.csv', 0.01)
-        servo.Action('test/test12.csv', 0.01)
-        servo.Action('test/test13.csv', 0.01)
-        servo.Action('test/test14.csv', 0.01)
-        servo.Action('test/test15.csv', 0.01)
-    servo.Stand('parameter/StandAll.csv')
-    servo.ahead('Ahead0.csv',0.01)
-
-#    for i in xrange(10):
-#        servo.ahead('DownRight.csv',0.05)
-#        servo.ahead('PullRight.csv',0.075)
-#        servo.ahead('DownLeft.csv',0.05)
-#        servo.ahead('PullLeft.csv',0.075)
-#    servo.Stand('parameter/StandAll.csv')
-
-#    servo.Action('Ball/BallCatch.csv',0.55)
-#    servo.Stand('parameter/StandAll.csv')
-#    for i in xrange(5):
-#        servo.ahead('Ahead0.csv',0.1)
-#        servo.ahead('DownRight.csv',0.1)
-#        servo.ahead('PullRight.csv',0.1)
-#        servo.ahead('DownLeft.csv',0.1)
-#        servo.ahead('PullLeft.csv',0.1)
-#    time.sleep(1.0)
-#    servo.Action('Ball/BallDust.csv',1.0)
-#    time.sleep(1.0)
-#    servo.Stand('parameter/StandAll.csv')
-#    servo.Action('hoge.csv',2.0)
+    for i in xrange(5):
+    	'''
+    	for i in xrange(8):
+		temp_str = "walk08/test" + str(i) + ".csv"
+		servo.Action(temp_str,0.01)
+	'''
+    	'''
+    	for i in xrange(12):
+		temp_str = "walk12/test" + str(i) + ".csv"
+		servo.Action(temp_str,0.01)
+	'''
+    	'''
+    	for i in xrange(16):
+		temp_str = "walk16/test" + str(i) + ".csv"
+		servo.Action(temp_str,0.01)
+        '''
+        '''
+    	for i in xrange(24):
+		temp_str = "walk24/test" + str(i) + ".csv"
+		servo.Action(temp_str,0.01)
+        '''
+	'''
+    	for i in xrange(24):
+		temp_str = "walk24high/test" + str(i) + ".csv"
+		servo.Action(temp_str,0.01)
+    	'''
+	'''
+    	for i in xrange(16):
+		temp_str = "turn_right/test" + str(i) + ".csv"
+		servo.Action(temp_str,0.01)
+	'''
+	''''
+    	for i in xrange(16):
+		temp_str = "turn_left/test" + str(i) + ".csv"
+		servo.Action(temp_str,0.01)
+	'''
+    servo.Stop()
+    servo.Action('Ball/BallCatch.csv',0.55)
+    servo.Stop()
+    #time.sleep(1.0)
+    servo.Action('Ball/BallDust.csv',0.55)
     time.sleep(1.0)
-    servo.Close()
+    #servo.Close()
 
 if __name__ == '__main__':
     main()
