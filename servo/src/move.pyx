@@ -72,6 +72,8 @@ class move:
             time.sleep(sleep)
             self.Data = self.DataImport()
         self.FileClose()
+    def Start(self):
+        self.servo.Start()
     def Stop(self):
         self.servo.Stop()
     def Close(self):

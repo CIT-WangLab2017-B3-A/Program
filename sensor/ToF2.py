@@ -12,6 +12,7 @@ class ToF:
 	self.old_Distance = [float(self.ToF.ReadDistance()) for i in xrange(self.LOOP-1)]
 
     def ReadDistance(self):
+        #start = time.time()#time
         alpha = 0.25
         #LOOP = 10
         tmp = 0.0
@@ -38,9 +39,13 @@ class ToF:
 
 	#RCフィルタ
         #Distance = Distance*alpha + self.old_Distance*(1.0-alpha)
-	print Distance*0.1
+	print Distance
 	#self.old_Distance = Distance
+	#print time.time()-start
 if __name__ == '__main__':
     TOF = ToF()
+    '''
     while True:
         TOF.ReadDistance()
+    '''
+    TOF.ReadDistance()

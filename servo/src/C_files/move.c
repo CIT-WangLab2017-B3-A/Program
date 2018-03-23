@@ -1172,6 +1172,7 @@ static const char __pyx_k_Close[] = "Close";
 static const char __pyx_k_Group[] = "Group";
 static const char __pyx_k_Speed[] = "Speed";
 static const char __pyx_k_Stand[] = "Stand";
+static const char __pyx_k_Start[] = "Start";
 static const char __pyx_k_Write[] = "Write";
 static const char __pyx_k_ahead[] = "ahead";
 static const char __pyx_k_close[] = "close";
@@ -1209,6 +1210,7 @@ static const char __pyx_k_LongPacket[] = "LongPacket";
 static const char __pyx_k_MakePacket[] = "MakePacket";
 static const char __pyx_k_move_Close[] = "move.Close";
 static const char __pyx_k_move_Stand[] = "move.Stand";
+static const char __pyx_k_move_Start[] = "move.Start";
 static const char __pyx_k_move_ahead[] = "move.ahead";
 static const char __pyx_k_Angle_Speed[] = "Angle_Speed";
 static const char __pyx_k_move_Action[] = "move.Action";
@@ -1237,6 +1239,7 @@ static PyObject *__pyx_n_s_MakePacket;
 static PyObject *__pyx_n_s_ON;
 static PyObject *__pyx_n_s_Speed;
 static PyObject *__pyx_n_s_Stand;
+static PyObject *__pyx_n_s_Start;
 static PyObject *__pyx_n_s_Stop;
 static PyObject *__pyx_n_s_TmpData;
 static PyObject *__pyx_n_s_Torque;
@@ -1269,6 +1272,7 @@ static PyObject *__pyx_n_s_move_FileClose;
 static PyObject *__pyx_n_s_move_FileOpen;
 static PyObject *__pyx_n_s_move_MakePacket;
 static PyObject *__pyx_n_s_move_Stand;
+static PyObject *__pyx_n_s_move_Start;
 static PyObject *__pyx_n_s_move_Stop;
 static PyObject *__pyx_n_s_move___init;
 static PyObject *__pyx_n_s_move_ahead;
@@ -1304,8 +1308,9 @@ static PyObject *__pyx_pf_4move_4move_8MakePacket(CYTHON_UNUSED PyObject *__pyx_
 static PyObject *__pyx_pf_4move_4move_10Stand(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_FileName); /* proto */
 static PyObject *__pyx_pf_4move_4move_12ahead(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_FileName, PyObject *__pyx_v_sleep); /* proto */
 static PyObject *__pyx_pf_4move_4move_14Action(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_FileName, PyObject *__pyx_v_sleep); /* proto */
-static PyObject *__pyx_pf_4move_4move_16Stop(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_4move_4move_18Close(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4move_4move_16Start(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4move_4move_18Stop(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_4move_4move_20Close(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_float_3_0;
 static PyObject *__pyx_int_1;
 static PyObject *__pyx_int_2;
@@ -1329,6 +1334,7 @@ static PyObject *__pyx_tuple__20;
 static PyObject *__pyx_tuple__22;
 static PyObject *__pyx_tuple__24;
 static PyObject *__pyx_tuple__26;
+static PyObject *__pyx_tuple__28;
 static PyObject *__pyx_codeobj__7;
 static PyObject *__pyx_codeobj__10;
 static PyObject *__pyx_codeobj__13;
@@ -1339,6 +1345,7 @@ static PyObject *__pyx_codeobj__21;
 static PyObject *__pyx_codeobj__23;
 static PyObject *__pyx_codeobj__25;
 static PyObject *__pyx_codeobj__27;
+static PyObject *__pyx_codeobj__29;
 
 /* "move.pyx":10
  * from uart import uart
@@ -3839,7 +3846,7 @@ static PyObject *__pyx_pf_4move_4move_14Action(CYTHON_UNUSED PyObject *__pyx_sel
  *             time.sleep(sleep)
  *             self.Data = self.DataImport()             # <<<<<<<<<<<<<<
  *         self.FileClose()
- *     def Stop(self):
+ *     def Start(self):
  */
     __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_DataImport); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 73, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
@@ -3869,8 +3876,8 @@ static PyObject *__pyx_pf_4move_4move_14Action(CYTHON_UNUSED PyObject *__pyx_sel
  *             time.sleep(sleep)
  *             self.Data = self.DataImport()
  *         self.FileClose()             # <<<<<<<<<<<<<<
- *     def Stop(self):
- *         self.servo.Stop()
+ *     def Start(self):
+ *         self.servo.Start()
  */
   __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_FileClose); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 74, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
@@ -3924,43 +3931,43 @@ static PyObject *__pyx_pf_4move_4move_14Action(CYTHON_UNUSED PyObject *__pyx_sel
 /* "move.pyx":75
  *             self.Data = self.DataImport()
  *         self.FileClose()
- *     def Stop(self):             # <<<<<<<<<<<<<<
- *         self.servo.Stop()
- *     def Close(self):
+ *     def Start(self):             # <<<<<<<<<<<<<<
+ *         self.servo.Start()
+ *     def Stop(self):
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4move_4move_17Stop(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_4move_4move_17Stop = {"Stop", (PyCFunction)__pyx_pw_4move_4move_17Stop, METH_O, 0};
-static PyObject *__pyx_pw_4move_4move_17Stop(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_4move_4move_17Start(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_4move_4move_17Start = {"Start", (PyCFunction)__pyx_pw_4move_4move_17Start, METH_O, 0};
+static PyObject *__pyx_pw_4move_4move_17Start(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("Stop (wrapper)", 0);
-  __pyx_r = __pyx_pf_4move_4move_16Stop(__pyx_self, ((PyObject *)__pyx_v_self));
+  __Pyx_RefNannySetupContext("Start (wrapper)", 0);
+  __pyx_r = __pyx_pf_4move_4move_16Start(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4move_4move_16Stop(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_4move_4move_16Start(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  __Pyx_RefNannySetupContext("Stop", 0);
+  __Pyx_RefNannySetupContext("Start", 0);
 
   /* "move.pyx":76
  *         self.FileClose()
+ *     def Start(self):
+ *         self.servo.Start()             # <<<<<<<<<<<<<<
  *     def Stop(self):
- *         self.servo.Stop()             # <<<<<<<<<<<<<<
- *     def Close(self):
- *         self.servo.Close()
+ *         self.servo.Stop()
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_servo); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Stop); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Start); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 76, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -3986,9 +3993,9 @@ static PyObject *__pyx_pf_4move_4move_16Stop(CYTHON_UNUSED PyObject *__pyx_self,
   /* "move.pyx":75
  *             self.Data = self.DataImport()
  *         self.FileClose()
- *     def Stop(self):             # <<<<<<<<<<<<<<
- *         self.servo.Stop()
- *     def Close(self):
+ *     def Start(self):             # <<<<<<<<<<<<<<
+ *         self.servo.Start()
+ *     def Stop(self):
  */
 
   /* function exit code */
@@ -3998,7 +4005,7 @@ static PyObject *__pyx_pf_4move_4move_16Stop(CYTHON_UNUSED PyObject *__pyx_self,
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("move.move.Stop", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("move.move.Start", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -4007,44 +4014,45 @@ static PyObject *__pyx_pf_4move_4move_16Stop(CYTHON_UNUSED PyObject *__pyx_self,
 }
 
 /* "move.pyx":77
- *     def Stop(self):
+ *     def Start(self):
+ *         self.servo.Start()
+ *     def Stop(self):             # <<<<<<<<<<<<<<
  *         self.servo.Stop()
- *     def Close(self):             # <<<<<<<<<<<<<<
- *         self.servo.Close()
- * 
+ *     def Close(self):
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_4move_4move_19Close(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static PyMethodDef __pyx_mdef_4move_4move_19Close = {"Close", (PyCFunction)__pyx_pw_4move_4move_19Close, METH_O, 0};
-static PyObject *__pyx_pw_4move_4move_19Close(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_4move_4move_19Stop(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_4move_4move_19Stop = {"Stop", (PyCFunction)__pyx_pw_4move_4move_19Stop, METH_O, 0};
+static PyObject *__pyx_pw_4move_4move_19Stop(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("Close (wrapper)", 0);
-  __pyx_r = __pyx_pf_4move_4move_18Close(__pyx_self, ((PyObject *)__pyx_v_self));
+  __Pyx_RefNannySetupContext("Stop (wrapper)", 0);
+  __pyx_r = __pyx_pf_4move_4move_18Stop(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_4move_4move_18Close(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_4move_4move_18Stop(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
   PyObject *__pyx_t_2 = NULL;
   PyObject *__pyx_t_3 = NULL;
-  __Pyx_RefNannySetupContext("Close", 0);
+  __Pyx_RefNannySetupContext("Stop", 0);
 
   /* "move.pyx":78
- *         self.servo.Stop()
+ *         self.servo.Start()
+ *     def Stop(self):
+ *         self.servo.Stop()             # <<<<<<<<<<<<<<
  *     def Close(self):
- *         self.servo.Close()             # <<<<<<<<<<<<<<
- * 
+ *         self.servo.Close()
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_servo); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 78, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 78, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Stop); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 78, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -4068,6 +4076,90 @@ static PyObject *__pyx_pf_4move_4move_18Close(CYTHON_UNUSED PyObject *__pyx_self
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "move.pyx":77
+ *     def Start(self):
+ *         self.servo.Start()
+ *     def Stop(self):             # <<<<<<<<<<<<<<
+ *         self.servo.Stop()
+ *     def Close(self):
+ */
+
+  /* function exit code */
+  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
+  goto __pyx_L0;
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_AddTraceback("move.move.Stop", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "move.pyx":79
+ *     def Stop(self):
+ *         self.servo.Stop()
+ *     def Close(self):             # <<<<<<<<<<<<<<
+ *         self.servo.Close()
+ * 
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_4move_4move_21Close(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static PyMethodDef __pyx_mdef_4move_4move_21Close = {"Close", (PyCFunction)__pyx_pw_4move_4move_21Close, METH_O, 0};
+static PyObject *__pyx_pw_4move_4move_21Close(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("Close (wrapper)", 0);
+  __pyx_r = __pyx_pf_4move_4move_20Close(__pyx_self, ((PyObject *)__pyx_v_self));
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_4move_4move_20Close(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  __Pyx_RefNannySetupContext("Close", 0);
+
+  /* "move.pyx":80
+ *         self.servo.Stop()
+ *     def Close(self):
+ *         self.servo.Close()             # <<<<<<<<<<<<<<
+ * 
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_servo); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_Close); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 80, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = NULL;
+  if (CYTHON_UNPACK_METHODS && likely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_2)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_2);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
+    }
+  }
+  if (__pyx_t_2) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  } else {
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 80, __pyx_L1_error)
+  }
+  __Pyx_GOTREF(__pyx_t_1);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "move.pyx":79
  *     def Stop(self):
  *         self.servo.Stop()
  *     def Close(self):             # <<<<<<<<<<<<<<
@@ -4145,6 +4237,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ON, __pyx_k_ON, sizeof(__pyx_k_ON), 0, 0, 1, 1},
   {&__pyx_n_s_Speed, __pyx_k_Speed, sizeof(__pyx_k_Speed), 0, 0, 1, 1},
   {&__pyx_n_s_Stand, __pyx_k_Stand, sizeof(__pyx_k_Stand), 0, 0, 1, 1},
+  {&__pyx_n_s_Start, __pyx_k_Start, sizeof(__pyx_k_Start), 0, 0, 1, 1},
   {&__pyx_n_s_Stop, __pyx_k_Stop, sizeof(__pyx_k_Stop), 0, 0, 1, 1},
   {&__pyx_n_s_TmpData, __pyx_k_TmpData, sizeof(__pyx_k_TmpData), 0, 0, 1, 1},
   {&__pyx_n_s_Torque, __pyx_k_Torque, sizeof(__pyx_k_Torque), 0, 0, 1, 1},
@@ -4177,6 +4270,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_move_FileOpen, __pyx_k_move_FileOpen, sizeof(__pyx_k_move_FileOpen), 0, 0, 1, 1},
   {&__pyx_n_s_move_MakePacket, __pyx_k_move_MakePacket, sizeof(__pyx_k_move_MakePacket), 0, 0, 1, 1},
   {&__pyx_n_s_move_Stand, __pyx_k_move_Stand, sizeof(__pyx_k_move_Stand), 0, 0, 1, 1},
+  {&__pyx_n_s_move_Start, __pyx_k_move_Start, sizeof(__pyx_k_move_Start), 0, 0, 1, 1},
   {&__pyx_n_s_move_Stop, __pyx_k_move_Stop, sizeof(__pyx_k_move_Stop), 0, 0, 1, 1},
   {&__pyx_n_s_move___init, __pyx_k_move___init, sizeof(__pyx_k_move___init), 0, 0, 1, 1},
   {&__pyx_n_s_move_ahead, __pyx_k_move_ahead, sizeof(__pyx_k_move_ahead), 0, 0, 1, 1},
@@ -4352,26 +4446,38 @@ static int __Pyx_InitCachedConstants(void) {
   /* "move.pyx":75
  *             self.Data = self.DataImport()
  *         self.FileClose()
- *     def Stop(self):             # <<<<<<<<<<<<<<
- *         self.servo.Stop()
- *     def Close(self):
+ *     def Start(self):             # <<<<<<<<<<<<<<
+ *         self.servo.Start()
+ *     def Stop(self):
  */
   __pyx_tuple__24 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__24)) __PYX_ERR(0, 75, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__24);
   __Pyx_GIVEREF(__pyx_tuple__24);
-  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_move_pyx, __pyx_n_s_Stop, 75, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_codeobj__25 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__24, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_move_pyx, __pyx_n_s_Start, 75, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__25)) __PYX_ERR(0, 75, __pyx_L1_error)
 
   /* "move.pyx":77
+ *     def Start(self):
+ *         self.servo.Start()
+ *     def Stop(self):             # <<<<<<<<<<<<<<
+ *         self.servo.Stop()
+ *     def Close(self):
+ */
+  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__26);
+  __Pyx_GIVEREF(__pyx_tuple__26);
+  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_move_pyx, __pyx_n_s_Stop, 77, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 77, __pyx_L1_error)
+
+  /* "move.pyx":79
  *     def Stop(self):
  *         self.servo.Stop()
  *     def Close(self):             # <<<<<<<<<<<<<<
  *         self.servo.Close()
  * 
  */
-  __pyx_tuple__26 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__26)) __PYX_ERR(0, 77, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__26);
-  __Pyx_GIVEREF(__pyx_tuple__26);
-  __pyx_codeobj__27 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__26, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_move_pyx, __pyx_n_s_Close, 77, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__27)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_tuple__28 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__28)) __PYX_ERR(0, 79, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__28);
+  __Pyx_GIVEREF(__pyx_tuple__28);
+  __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_move_pyx, __pyx_n_s_Close, 79, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4712,25 +4818,37 @@ static int __pyx_pymod_exec_move(PyObject *__pyx_pyinit_module)
   /* "move.pyx":75
  *             self.Data = self.DataImport()
  *         self.FileClose()
+ *     def Start(self):             # <<<<<<<<<<<<<<
+ *         self.servo.Start()
+ *     def Stop(self):
+ */
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_4move_4move_17Start, 0, __pyx_n_s_move_Start, NULL, __pyx_n_s_move, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_1);
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_Start, __pyx_t_1) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+  /* "move.pyx":77
+ *     def Start(self):
+ *         self.servo.Start()
  *     def Stop(self):             # <<<<<<<<<<<<<<
  *         self.servo.Stop()
  *     def Close(self):
  */
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_4move_4move_17Stop, 0, __pyx_n_s_move_Stop, NULL, __pyx_n_s_move, __pyx_d, ((PyObject *)__pyx_codeobj__25)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 75, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_4move_4move_19Stop, 0, __pyx_n_s_move_Stop, NULL, __pyx_n_s_move, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_Stop, __pyx_t_1) < 0) __PYX_ERR(0, 75, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_Stop, __pyx_t_1) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "move.pyx":77
+  /* "move.pyx":79
  *     def Stop(self):
  *         self.servo.Stop()
  *     def Close(self):             # <<<<<<<<<<<<<<
  *         self.servo.Close()
  * 
  */
-  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_4move_4move_19Close, 0, __pyx_n_s_move_Close, NULL, __pyx_n_s_move, __pyx_d, ((PyObject *)__pyx_codeobj__27)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 77, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_CyFunction_NewEx(&__pyx_mdef_4move_4move_21Close, 0, __pyx_n_s_move_Close, NULL, __pyx_n_s_move, __pyx_d, ((PyObject *)__pyx_codeobj__29)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_Close, __pyx_t_1) < 0) __PYX_ERR(0, 77, __pyx_L1_error)
+  if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_Close, __pyx_t_1) < 0) __PYX_ERR(0, 79, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
   /* "move.pyx":9

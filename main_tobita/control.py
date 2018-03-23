@@ -63,6 +63,12 @@ class Control:
 			temp_str = 'stand_before_walk/test' + str(i) + '.csv'
 			servo.Action(temp_str,0.01)
 	
+	def motion_01(self):
+		servo = move()
+		for i in xrange(36):
+			temp_str = 'motion_01r/test' + str(i) + '.csv'
+			servo.Action(temp_str,0.01)
+	
 	def stand_up_before_turn(self,direction):
 		servo = move()
 		for i in xrange(16):
@@ -148,6 +154,36 @@ class Control:
 	def ball_dust(self):
 		self.ball_check_fg = 0
 		servo = move()
+		#demo_action
+
+		for i in xrange(16):
+			temp_str = "stand_up_normal/test" + str(i) + ".csv"
+			servo.Action(temp_str,0.01)
+		for i in xrange(2):
+			for j in xrange(16):
+				temp_str = "motion_04/test" + str(j) + ".csv"
+				servo.Action(temp_str,0.01)
+		for i in xrange(2):
+			for j in xrange(16):
+				temp_str = "motion_02/test" + str(j) + ".csv"
+				servo.Action(temp_str,0.01)
+		for i in xrange(2):
+			for j in xrange(16):
+				temp_str = "motion_06/test" + str(j) + ".csv"
+				servo.Action(temp_str,0.01)
+		for i in xrange(2):
+			for j in xrange(16):
+				temp_str = "motion_05/test" + str(j) + ".csv"
+				servo.Action(temp_str,0.01)
+		for i in xrange(2):
+			for j in xrange(16):
+				temp_str = "motion_02/test" + str(15-j) + ".csv"
+				servo.Action(temp_str,0.01)
+		for i in xrange(2):
+			for j in xrange(16):
+				temp_str = "motion_07/test" + str(15-j) + ".csv"
+				servo.Action(temp_str,0.01)
+
 		servo.Action('Ball/BallDust.csv',1.0)
 		servo.Close()
 	
@@ -155,6 +191,8 @@ class Control:
 		print action_data
 		if action_data[0] == 'b':
 			self.ball_catch()
+		if action_data[0] == 'm':
+			self.motion_01()
 		if action_data[0] == 'd':
 			self.ball_dust()
 		if action_data[0] == 'x':

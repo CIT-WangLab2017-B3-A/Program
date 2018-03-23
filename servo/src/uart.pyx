@@ -68,6 +68,8 @@ class uart:
     def Torque(self, ID, SW):
         self.TxData = self.ShortPacket(ID, 0x00, 0x24, 0x01, SW)
         self.Write(self.TxData)
+    def Start(self):
+        self.Torque(0xFF, self.ON)
     def Stop(self):
         self.Torque(0xFF, self.PANTCH)
     def ZeroAll(self):
