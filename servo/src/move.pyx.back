@@ -6,11 +6,11 @@ import sys, os.path
 import serial
 import time
 from uart import *
-class movei(uart):
+class move:
     def __init__(self, LEG_SERVOS=3, port='/dev/ttyS0', rate=115200):
-        super().__init__(port, rate)
         self.LegServos = LEG_SERVOS
-        self.Torque(0xFF, self.servo.ON)
+        self.servo = uart(port, rate)
+        self.servo.Torque(0xFF, self.servo.ON)
     def FileOpen(self, FileName=None):
         if FileName!=None:
             if os.path.isfile(FileName):

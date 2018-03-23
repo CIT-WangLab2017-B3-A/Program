@@ -5,13 +5,11 @@
 import sys
 import serial
 import time
-class uart(object):
+class uart:
     def __init__(self, port='/dev/ttyS0', rate=115200):
-        # torque mode
-        self.OFF    = 0x00
-        self.ON     = 0x01
-        self.PANTCH = 0x02
-        # open port
+        self.OFF=0x00
+        self.ON=0x01
+        self.PANTCH=0x02
         self.uart=serial.Serial(port, rate)
     def Write(self, TxData):
         self.uart.write(TxData)
@@ -19,42 +17,34 @@ class uart(object):
     def Angle_Speed(self, fAngle, fSpeed):
         Angle = int(10.0*float(fAngle))
         Speed = int(100.0*float(fSpeed))
-        tmpData = [Angle, (Angle>>8), Speed, (Speed>>8)]
-        self.Data = map(lambda x:x&0x00FF, tmpData)
+        self.Data = [0x00FF&Angle, 0x00FF&(Angle>>8),\
+            0x00FF&Speed, 0x00FF&(Speed>>8)]
         return self.Data
     def CheckSum(self, Data):
         self.check=0x00
-        for x in Data:
-            self.check ^= x
+        for i in range(2, len(Data)):
+            self.check = self.check^Data[i]
         return self.check
     def ShortPacket(self, ID, Flag, Address, Cnt, Data):
-        # packet header
-        self.TxData = [0xFA, 0xAF]
-        if type(Data)==type([]): # array
-            Length = len(Data)
-            tmpData = [ID, Flag, Address, Length, Cnt]
-            tmpData.extend(Data)
-        elif type(Data)==type(None):# None data(ex.reboot)
-            tmpData = [ID, Flag, Address, 0x00, Cnt]
-        else: # not array
-            Length = 0x01
-            tmpData = [ID, Flag, Address, Length, Cnt]
-            tmpData.append(Data)
-        # checkSum
-        tmpData.append(self.CheckSum(tmpData))
-        self.TxData.extend(tmpData)
+        if type(Data)==type([]):
+            self.Length = len(Data)
+            self.TxData = [0xFA, 0xAF, ID, Flag, Address, self.Length, Cnt]
+            self.TxData.extend(Data)
+        elif type(Data)==type(None):
+            pass
+        else:
+            self.Length = 0x01
+            self.TxData = [0xFA, 0xAF, ID, Flag, Address, self.Length, Cnt]
+            self.TxData.append(Data)
+        self.TxData.append(self.CheckSum(self.TxData))
         return self.TxData
     def LongPacket(self, Address, Data):
-        # packet header
-        self.TxData = [0xFA, 0xAF]
-        Length = len(Data[0])# data par servo
-        Cnt = len(Data)# servos
-        tmpData = [0x00, 0x00, Address, Length, Cnt]
-        for x in xrange(Data):
-            tmpData.extend(x)
-        # checkSum
-        tmpData.append(self.CheckSum(tmpData))
-        self.TxData.extend(tmpData)
+        self.Length = len(Data[0])
+        self.Cnt = len(Data)
+        self.TxData = [0xFA, 0xAF, 0x00, 0x00, Address, self.Length, self.Cnt]
+        for i in xrange(self.Cnt):
+            self.TxData.extend(Data[i])
+        self.TxData.append(self.CheckSum(self.TxData))
         return self.TxData
     #control func
     def Reboot(self, ID):
@@ -91,7 +81,7 @@ class uart(object):
         self.Stop()
     def Tester(self,ID):
         self.Torque(ID, self.ON)
-        for j in xrange(2):#two loop
+        for j in xrange(2):
             self.Data = self.Angle_Speed(30, 0.01)
             self.TxData = self.ShortPacket(ID, 0x00, 0x1E, 0x01, self.Data)
             self.Write(self.TxData)
@@ -102,8 +92,5 @@ class uart(object):
             time.sleep(1.0)
         self.Torque(ID, self.OFF)
     def Close(self):
-        self.Torque(0xFF,self.OFF)
-        self.uart.close()
-    def __del__(self):
         self.Torque(0xFF,self.OFF)
         self.uart.close()
