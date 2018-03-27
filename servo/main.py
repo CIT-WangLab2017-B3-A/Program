@@ -11,7 +11,7 @@ import time
 # main program
 def main():
     servo = move()
-    servo.Stand('parameter/StandAll.csv')
+    servo.Action('BallCatch.csv',1.0)
     
     for i in xrange(5):
     	'''
@@ -50,12 +50,12 @@ def main():
 		servo.Action(temp_str,0.01)
 	'''
     servo.Stop()
-    servo.Action('Ball/BallCatch.csv',0.55)
-    servo.Stop()
+#    servo.Action('Ball/BallCatch.csv',0.55)
+#    servo.Stop()
     #time.sleep(1.0)
-    servo.Action('Ball/BallDust.csv',0.55)
+#    servo.Action('Ball/BallDust.csv',0.55)
     time.sleep(1.0)
-    #servo.Close()
+    servo.Close()
 
 if __name__ == '__main__':
     main()

@@ -24,18 +24,18 @@ class uart(object):
         Angle = int(10.0 *float(fAngle))
         Speed = int(100.0*float(fSpeed))
         tmpData = [Angle, (Angle>>8), Speed, (Speed>>8)]
-        self.Data = map(lambda x:x&0x00FF, tmpData)
-        return self.Data
+        Data = map(lambda x:x&0x00FF, tmpData)
+        return Data
     # calculate CheckSum
     def CheckSum(self, Data):
-        self.check=0x00
+        check=0x00
         for x in Data:
-            self.check ^= x
-        return self.check
+            check ^= x
+        return check
     # ShortPacket
     def ShortPacket(self, ID, Flag, Address, Cnt, Data):
         # packet header
-        self.TxData = [0xFA, 0xAF]
+        TxData = [0xFA, 0xAF]
         if type(Data)==type([]): # array
             Length = len(Data)
             tmpData = [ID, Flag, Address, Length, Cnt]
@@ -48,11 +48,11 @@ class uart(object):
             tmpData.append(Data)
         # CheckSum
         tmpData.append(self.CheckSum(tmpData))
-        self.TxData.extend(tmpData)
-        return self.TxData
+        TxData.extend(tmpData)
+        return TxData
     def LongPacket(self, Address, Data):
         # packet header
-        self.TxData = [0xFA, 0xAF]
+        TxData = [0xFA, 0xAF]
         Length = len(Data[0])# data par servo
         Cnt = len(Data)# servos
         tmpData = [0x00, 0x00, Address, Length, Cnt]
@@ -60,8 +60,8 @@ class uart(object):
             tmpData.extend(x)
         # checkSum
         tmpData.append(self.CheckSum(tmpData))
-        self.TxData.extend(tmpData)
-        return self.TxData
+        TxData.extend(tmpData)
+        return TxData
     #control func
     def Reboot(self, ID):
         TxData = self.ShortPacket(ID, 0x20, 0xFF, 0x00, None)
@@ -112,6 +112,5 @@ class uart(object):
         self.Torque(ID, self.OFF)
     def Close(self):
         self.Torque(0xFF,self.OFF)
-        self.uart.close()
     def __del__(self):
-        self.Close()
+        self.uart.close()
