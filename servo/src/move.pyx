@@ -2,6 +2,7 @@
 # coding: utf-8
 
 # move module made of Hiroki Yumigeta
+import numpy as np
 import sys, os.path
 import serial
 import time
@@ -31,16 +32,32 @@ class move(uart):
             Group  = DataList[0]# Group
             fSpeed = DataList[1]# Speed
             for i in xrange(self.LegServos):
-                VID    = [(3*int(Group)) + (i+1)]# ID
+                VID    = (3*int(Group)) + (i+1)# ID
                 fAngle = DataList[i+2]# 角度
                 # float to int
                 CtrData = self.Angle_Speed(fAngle, fSpeed)
-                VID.extend(CtrData)
-                Data.append(VID)# 2d array
+                CtrData.insert(0,VID)
+                Data.append(CtrData)# 2d array
             if DataList[-1] != ('&' or '&'+'\r'):# 配列の最後
                 break
         return Data
-    def Action(self, FileName, sleep):
+    def ListAct(self, Data):
+        CtrData = []
+        sleepTime = 0.0
+        for Datalist in Data:
+            #[[ID],[A1,S1][A2,S2][A3,S3]]
+            Group = Datalist.pop(0)# Group
+            #[[A1,S1][A2,S2][A3,S3]]
+            #for i in range(Datalist):# ここerror
+            for i in range(3):
+                VID   = (3*int(Group[0])) + (i+1)# ID
+                tmpData = self.Angle_Speed(Datalist[i][0], Datalist[i][1])
+                tmpData.insert(0, VID)
+                CtrData.append(tmpData)
+                sleepTime += Datalist[i][1]
+        self.Write(self.LongPacket(self.ADDRESS_POS, CtrData))
+        time.sleep(sleepTime)
+    def CSVAct(self, FileName, sleep):
         try:
             self.FileOpen('parameter/'+FileName)
             Data = self.DataImport()
@@ -51,3 +68,14 @@ class move(uart):
             self.FileClose()
         except IOError:
             print 'File is not found'
+    def Action(self, InData, sleep=1.0):
+        try:
+            CnvData=InData.tolist()
+            self.ListAct(CnvData)
+        except AttributeError:
+            if type(InData)==type([]):
+                self.ListAct(InData)
+            elif type(InData)==type(''):
+                self.CSVAct(InData,sleep)
+            else:
+                print 'Value Error(data is File or List)'
