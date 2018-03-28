@@ -157,3 +157,6 @@ CATKIN_IGNORE
 
 # backup files
 *.back
+
+# swap file
+*.swp
