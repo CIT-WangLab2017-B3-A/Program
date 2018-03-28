@@ -48,8 +48,7 @@ class move(uart):
             #[[ID],[A1,S1][A2,S2][A3,S3]]
             Group = Datalist.pop(0)# Group
             #[[A1,S1][A2,S2][A3,S3]]
-            #for i in range(Datalist):# ここerror
-            for i in range(3):
+            for i in range(len(Datalist)):
                 VID   = (3*int(Group[0])) + (i+1)# ID
                 tmpData = self.Angle_Speed(Datalist[i][0], Datalist[i][1])
                 tmpData.insert(0, VID)

@@ -4,9 +4,11 @@
 # sample program
 
 # import Library
-from move import move
+import sys
+sys.path.append('src')
 import time
 import numpy as np
+from move import move
 
 # main program
 def main():
@@ -26,14 +28,15 @@ def main():
 
     # class move(LEG_SERVOS=3, port='/dev/ttyS0', rate=115200)
     servo = move()
-
-    # 従来型(file)
-    servo.Action('zero.csv',1.0)
-    # 配列(普通の)
-    servo.Action(Data)
-    # 配列(numpy)
-    servo.Action(npData)
-
+    try:
+        # 従来型(file)
+        servo.Action('zero.csv',1.0)
+        # 配列(普通の)
+        servo.Action(Data)
+        # 配列(numpy)
+        servo.Action(npData)
+    except KeyboardInterrupt:
+        servo.Close()
     time.sleep(1.0)
     servo.Close()
 
