@@ -5,8 +5,8 @@
 
 ## src dir
  python module file
-  uart.py
-  move.py
+  *uart.py
+  *move.py
 
 ## src/module.sh
  create cython file(python module)
