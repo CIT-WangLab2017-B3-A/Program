@@ -1,18 +1,18 @@
 # servo dir
 
-* main.py
+## main.py
  sample program
 
-* src dir
+## src dir
  python module file
   uart.py
   move.py
 
-* src/module.sh
+## src/module.sh
  create cython file(python module)
 
-* parameter dir
+## parameter dir
  sample motion data
 
-* tools dir
+## tools dir
  any tools
